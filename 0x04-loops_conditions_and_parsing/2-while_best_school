@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+#prints "Best School" 10 times using while loop
+iterator=0
+while [ $iterator -lt 10 ];
+do
+        echo "Best School"
+        iterator=$((iterator + 1))
+done
