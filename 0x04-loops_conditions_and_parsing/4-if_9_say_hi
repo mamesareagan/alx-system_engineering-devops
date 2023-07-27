@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+#say hi after 9th print
+iterator=1
+while [ $iterator -le 10 ];
+do
+        echo "Best School"
+        if [ $iterator -eq 9 ];
+        then
+                echo "Hi"
+        fi
+        iterator=$(( iterator + 1 ))
+done
