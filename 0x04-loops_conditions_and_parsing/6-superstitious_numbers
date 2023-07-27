@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+#displays numbers from 1 to 20 and:
+
+#displays 4 and then bad luck from China for the 4th loop iteration
+#displays 9 and then bad luck from Japan for the 9th loop iteration
+#displays 17 and then bad luck from Italy for the 17th loop iteration
+iterator=1
+while [ $iterator -le 20 ]
+do
+        case $iterator in
+                4)
+                        echo "$iterator"
+                        echo "bad luck from China";;
+                9)
+                        echo "$iterator"
+                        echo "bad luck from Japan";;
+                17)
+                        echo "$iterator"
+                        echo "bad luck from Italy";;
+                *)
+                        echo "$iterator";;
+         esac
+         iterator=$(( iterator + 1 ))
+done
