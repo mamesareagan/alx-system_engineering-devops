@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+#displays the time for 12 hours and 59 minutes
+iterator=0
+while [ $iterator -le 12 ];
+do
+        echo "Hour: $iterator"
+        iter=1
+        while [ $iter -le 59 ];
+        do
+                echo "$iter"
+                iter=$(( iter + 1))
+        done
+        iterator=$(( iterator + 1 ))
+done
