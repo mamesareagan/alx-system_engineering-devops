@@ -1,5 +1,7 @@
-exec {'killmenow':
-  command => 'pkill killmenow',
-  onlyif  => 'pgrep killmenow',
-  path    => ['/bin', '/usr/bin'],
+# Using Puppet, create a manifest that kills a process named killmenow
+
+exec { 'killmenow':
+  command => 'pkill -f "bash.*killmenow"',
+  path    => '/usr/bin:/usr/sbin:/bin:/sbin',
+  onlyif  => 'pgrep -f "bash.*killmenow"',
 }
