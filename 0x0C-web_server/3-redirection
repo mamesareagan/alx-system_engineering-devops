@@ -5,13 +5,11 @@
 apt-get update
 apt-get install -y nginx
 
-mkdir  /etc/nginx/html
-touch /etc/nginx/html/index.html
-echo "Hello World!" > /etc/nginx/html/index.html
+echo "Hello World!" > /var/www/html/index.html
 printf %s "server {
     listen 80;
     listen [::]:80 default_server;
-    root   /etc/nginx/html;
+    root   /var/www/html;
     index  index.html index.htm;
 
     location /redirect_me {
