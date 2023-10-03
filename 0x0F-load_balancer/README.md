@@ -1,0 +1,1 @@
+In this project I learnt about HaProxy as a load balancer
