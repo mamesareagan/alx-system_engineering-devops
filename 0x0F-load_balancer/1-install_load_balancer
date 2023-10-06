@@ -1,54 +1,22 @@
 #!/usr/bin/env bash
-# Installs HAProxy using the default version available in Ubuntu 20.04 repositories.
-# Configures HAProxy with a basic round-robin load balancing configuration.
+# Installs HAProxy version 1.8 with the following configurations:
+#*    Enables management via the init script.
+#*    Distributes requests using a round-robin algorithm.
 
-# Remove the unnecessary PPA
-sudo add-apt-repository --remove ppa:vbernat/haproxy-1.8
+apt-get update
+apt-get install -y haproxy
 
-# Update the package list
-sudo apt-get update
+printf %s "
+frontend hbnb-lb_front
+        bind *:80
+        mode http
+        default_backend hbnb-lb_back
+backend hbnb-lb_back
+        balance roundrobin
+        server 309064-web-01 	100.25.165.225:80 check
+        server 309064-web-01 18.233.65.83:80 check
+" >> /etc/haproxy/haproxy.cfg
 
-# Install HAProxy (without specifying a version)
-sudo apt-get install -y haproxy
+echo "ENABLED=1" >> /etc/default/haproxy
 
-# Enable HAProxy management via init script
-echo "ENABLED=1" | sudo tee -a /etc/default/haproxy
-
-# Backup the default HAProxy configuration
-sudo mv /etc/haproxy/haproxy.cfg{,.original}
-
-# Create a new HAProxy configuration with round-robin load balancing
-printf %s "global
-    log 127.0.0.1 local0 notice
-    maxconn 2000
-    user haproxy
-    group haproxy
-
-defaults
-    log     global
-    mode    http
-    option  httplog
-    option  dontlognull
-    retries 3
-    option redispatch
-    timeout connect  5000
-    timeout client  10000
-    timeout server  10000
-
-listen hbnb
-    bind 0.0.0.0:80
-    mode http
-    stats enable
-    stats uri /haproxy?stats
-    balance roundrobin
-    option httpclose
-    option forwardfor
-    server  309064-web-01 100.25.153.121:80 check
-    server  309064-web-02 100.25.23.179:80 check
-" | sudo tee /etc/haproxy/haproxy.cfg
-
-# Start the HAProxy service
-sudo systemctl start haproxy
-
-# Optionally, enable HAProxy to start on boot
-sudo systemctl enable haproxy
+service haproxy start
