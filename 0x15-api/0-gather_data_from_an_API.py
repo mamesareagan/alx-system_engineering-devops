@@ -25,7 +25,7 @@ if __name__ == "__main__":
         lendone = len(done_todo)
         sen1 = f"Employeee {user_name} is done"
         # with tasks({lendone}/{total_todo})"
-        sen = sen1 + " with tasks({lendone}/{total_todo})"
+        sen = sen1 + f" with tasks({lendone}/{total_todo})"
 
         print(sen)
         for task in done_todo:
