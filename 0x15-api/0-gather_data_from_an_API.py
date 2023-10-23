@@ -21,8 +21,13 @@ if __name__ == "__main__":
         user_todo = requests.get(todo_url)
         user_todo = user_todo.json()
         total_todo = len(user_todo)
-        done_todo = [task for task in user_todo if task.get("completed", False)]
-        print("Employeee {} is done with tasks({}/{})".format(user_name, len(done_todo), total_todo))
+        done_todo = [task for task in user_todo if task.get("completed")]
+        lendone = len(done_todo)
+        sen1 = f"Employeee {user_name} is done"
+        # with tasks({lendone}/{total_todo})"
+        sen = sen1 + " with tasks({lendone}/{total_todo})"
+
+        print(sen)
         for task in done_todo:
             task_done = task.get("title")
             print("\t {}".format(task_done))
