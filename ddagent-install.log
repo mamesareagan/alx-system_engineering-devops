@@ -1,0 +1,9 @@
+[34m
+* Datadog Agent 7 install script v1.23.0
+[0m
+[34m
+* Installing apt-transport-https, curl and gnupg
+[0m
+sudo: a password is required
+[31m'apt-get update' failed, the script will not install the latest version of apt-transport-https.[0m
+sudo: a password is required
